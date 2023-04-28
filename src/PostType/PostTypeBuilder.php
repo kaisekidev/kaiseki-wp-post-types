@@ -8,7 +8,7 @@ use PostTypes\PostType;
 
 use function array_merge;
 
-final class PostTypeBuilder
+final class PostTypeBuilder implements PostTypeBuilderInterface
 {
     /**
      * For default post type options, see $args parameter of register_post_type()

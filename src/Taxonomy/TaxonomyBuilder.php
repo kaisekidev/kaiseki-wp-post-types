@@ -8,7 +8,7 @@ use PostTypes\Taxonomy;
 
 use function array_merge;
 
-final class TaxonomyBuilder
+final class TaxonomyBuilder implements TaxonomyBuilderInterface
 {
     /**
      * For default taxonomy options, see $args parameter of register_taxonomy()
