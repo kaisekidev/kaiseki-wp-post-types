@@ -6,7 +6,7 @@ namespace Kaiseki\WordPress\PostType;
 
 use Kaiseki\WordPress\PostType\PostType\PostTypeBuilder;
 use Kaiseki\WordPress\PostType\PostType\PostTypeBuilderFactory;
-use Kaiseki\WordPress\PostType\Taxonomy\PostTypeBuilderInterface;
+use Kaiseki\WordPress\PostType\PostType\PostTypeBuilderInterface;
 use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilder;
 use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilderFactory;
 use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilderInterface;

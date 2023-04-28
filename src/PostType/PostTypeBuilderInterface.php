@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kaiseki\WordPress\PostType\Taxonomy;
+namespace Kaiseki\WordPress\PostType\PostType;
 
 use PostTypes\PostType;
 
