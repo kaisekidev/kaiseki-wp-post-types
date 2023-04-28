@@ -26,7 +26,7 @@ final class PostTypeBuilder
      * @param array<string, mixed> $options
      * @param array<string, string> $labels
      */
-    public function createPostType(array $names, array $options = [], array $labels = []): PostType
+    public function build(array $names, array $options = [], array $labels = []): PostType
     {
         return new PostType($names, array_merge($this->defaultPostTypeOptions, $options), $labels);
     }

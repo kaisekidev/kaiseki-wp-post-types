@@ -26,7 +26,7 @@ final class TaxonomyBuilder
      * @param array<string, mixed> $options
      * @param array<string, string> $labels
      */
-    public function createTaxonomy(array $names, array $options = [], array $labels = []): Taxonomy
+    public function build(array $names, array $options = [], array $labels = []): Taxonomy
     {
         return new Taxonomy($names, array_merge($this->defaultTaxonomyOptions, $options), $labels);
     }

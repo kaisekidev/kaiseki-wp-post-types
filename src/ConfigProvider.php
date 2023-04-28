@@ -6,8 +6,10 @@ namespace Kaiseki\WordPress\PostType;
 
 use Kaiseki\WordPress\PostType\PostType\PostTypeBuilder;
 use Kaiseki\WordPress\PostType\PostType\PostTypeBuilderFactory;
+use Kaiseki\WordPress\PostType\Taxonomy\PostTypeBuilderInterface;
 use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilder;
 use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilderFactory;
+use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilderInterface;
 
 final class ConfigProvider
 {
@@ -18,6 +20,10 @@ final class ConfigProvider
     {
         return [
             'dependencies' => [
+                'aliases' => [
+                    PostTypeBuilderInterface::class => PostTypeBuilder::class,
+                    TaxonomyBuilderInterface::class => TaxonomyBuilder::class,
+                ],
                 'factories' => [
                     PostTypeBuilder::class => PostTypeBuilderFactory::class,
                     TaxonomyBuilder::class => TaxonomyBuilderFactory::class,
