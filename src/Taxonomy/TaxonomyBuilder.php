@@ -28,6 +28,14 @@ final class TaxonomyBuilder implements TaxonomyBuilderInterface
      */
     public function build(array $names, array $options = [], array $labels = []): Taxonomy
     {
-        return new Taxonomy($names, array_merge($this->defaultTaxonomyOptions, $options), $labels);
+        $options = array_merge($this->defaultTaxonomyOptions, $options);
+        return new class ($names, $options, $labels) extends Taxonomy {
+            // @phpstan-ignore-next-line
+            public function options(array $options = [])
+            {
+                $this->options = array_merge($this->options, $options);
+                return $this;
+            }
+        };
     }
 }
