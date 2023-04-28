@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Kaiseki\WordPress\PostType;
 
-use Kaiseki\WordPress\PostType\PostType\PostTypeFactory;
-use Kaiseki\WordPress\PostType\PostType\PostTypeFactoryFactory;
-use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyFactory;
-use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyFactoryFactory;
+use Kaiseki\WordPress\PostType\PostType\PostTypeBuilder;
+use Kaiseki\WordPress\PostType\PostType\PostTypeBuilderFactory;
+use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilder;
+use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilderFactory;
 
 final class ConfigProvider
 {
@@ -19,8 +19,8 @@ final class ConfigProvider
         return [
             'dependencies' => [
                 'factories' => [
-                    PostTypeFactory::class => PostTypeFactoryFactory::class,
-                    TaxonomyFactory::class => TaxonomyFactoryFactory::class,
+                    PostTypeBuilder::class => PostTypeBuilderFactory::class,
+                    TaxonomyBuilder::class => TaxonomyBuilderFactory::class,
                 ],
             ],
         ];
