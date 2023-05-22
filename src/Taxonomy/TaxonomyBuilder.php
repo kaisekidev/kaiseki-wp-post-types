@@ -33,7 +33,7 @@ final class TaxonomyBuilder implements TaxonomyBuilderInterface
             // @phpstan-ignore-next-line
             public function options(array $options = [])
             {
-                $this->options = array_merge($this->options, $options);
+                $this->options = array_merge((array)$this->options, $options);
                 return $this;
             }
         };
