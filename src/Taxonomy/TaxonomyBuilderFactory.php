@@ -11,9 +11,10 @@ class TaxonomyBuilderFactory
 {
     public function __invoke(ContainerInterface $container): TaxonomyBuilder
     {
-        $config = Config::get($container);
+        $config = Config::fromContainer($container);
+
         return new TaxonomyBuilder(
-            $config->array('post_type/default_taxonomy_options', [])
+            $config->array('post_type.default_taxonomy_options')
         );
     }
 }

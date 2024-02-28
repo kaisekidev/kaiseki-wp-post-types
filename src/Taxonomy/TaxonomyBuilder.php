@@ -23,19 +23,13 @@ final class TaxonomyBuilder implements TaxonomyBuilderInterface
 
     /**
      * @param array<string, string> $names
-     * @param array<string, mixed> $options
+     * @param array<string, mixed>  $options
      * @param array<string, string> $labels
      */
     public function build(array $names, array $options = [], array $labels = []): Taxonomy
     {
         $options = array_merge($this->defaultTaxonomyOptions, $options);
-        return new class ($names, $options, $labels) extends Taxonomy {
-            // @phpstan-ignore-next-line
-            public function options(array $options = [])
-            {
-                $this->options = array_merge((array)$this->options, $options);
-                return $this;
-            }
-        };
+
+        return new Taxonomy($names, $options, $labels);
     }
 }

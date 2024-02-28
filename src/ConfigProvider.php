@@ -19,6 +19,10 @@ final class ConfigProvider
     public function __invoke(): array
     {
         return [
+            'post_type' => [
+                'default_post_type_options' => [],
+                'default_taxonomy_options' => [],
+            ],
             'dependencies' => [
                 'aliases' => [
                     PostTypeBuilderInterface::class => PostTypeBuilder::class,

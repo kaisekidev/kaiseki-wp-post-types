@@ -13,6 +13,7 @@ class PostTypeHelper
         foreach ($taxonomies as $taxonomy) {
             $postType->taxonomy($taxonomy);
         }
+
         return $postType;
     }
 }

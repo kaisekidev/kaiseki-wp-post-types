@@ -23,19 +23,13 @@ final class PostTypeBuilder implements PostTypeBuilderInterface
 
     /**
      * @param array<string, string> $names
-     * @param array<string, mixed> $options
+     * @param array<string, mixed>  $options
      * @param array<string, string> $labels
      */
     public function build(array $names, array $options = [], array $labels = []): PostType
     {
         $options = array_merge($this->defaultPostTypeOptions, $options);
-        return new class ($names, $options, $labels) extends PostType {
-            // @phpstan-ignore-next-line
-            public function options(array $options = [])
-            {
-                $this->options = array_merge((array)$this->options, $options);
-                return $this;
-            }
-        };
+
+        return new PostType($names, $options, $labels);
     }
 }

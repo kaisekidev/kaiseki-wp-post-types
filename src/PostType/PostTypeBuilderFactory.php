@@ -11,9 +11,10 @@ class PostTypeBuilderFactory
 {
     public function __invoke(ContainerInterface $container): PostTypeBuilder
     {
-        $config = Config::get($container);
+        $config = Config::fromContainer($container);
+
         return new PostTypeBuilder(
-            $config->array('post_type/default_post_type_options', [])
+            $config->array('post_type.default_post_type_options')
         );
     }
 }
