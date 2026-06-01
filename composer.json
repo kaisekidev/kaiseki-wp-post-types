@@ -30,7 +30,7 @@
   },
   "require": {
     "php": "^8.2",
-    "jjgrainger/posttypes": "^2.2",
+    "jjgrainger/posttypes": "^2.2 || ^3.0",
     "kaiseki/config": "^2.0",
     "psr/container": "^1.1 || ^2.0"
   },
