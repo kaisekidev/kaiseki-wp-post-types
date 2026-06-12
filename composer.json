@@ -1,7 +1,7 @@
 {
   "name": "kaiseki/wp-post-types",
   "type": "library",
-  "description": "Build and register WordPress post types and taxonomies — a config-driven wrapper around jjgrainger/posttypes",
+  "description": "Declare and register WordPress post types and taxonomies — immutable definitions, config-driven, first-party",
   "license": "MIT",
   "homepage": "https://github.com/kaisekidev/kaiseki-wp-post-types",
   "authors": [
@@ -30,14 +30,16 @@
   },
   "require": {
     "php": "^8.2",
-    "jjgrainger/posttypes": "^2.2",
     "kaiseki/config": "^2.0",
+    "kaiseki/wp-hook": "^2.0",
     "psr/container": "^1.1 || ^2.0"
   },
   "require-dev": {
     "bnf/phpstan-psr-container": "^1.1",
+    "brain/monkey": "^2.6",
     "kaiseki/php-coding-standard": "^1.0",
     "maglnet/composer-require-checker": "^4.0",
+    "mockery/mockery": "^1.6",
     "php-stubs/wordpress-stubs": "^6.2",
     "phpstan/extension-installer": "^1.4",
     "phpstan/phpstan": "^2.0",

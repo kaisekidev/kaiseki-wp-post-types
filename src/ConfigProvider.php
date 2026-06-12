@@ -4,13 +4,6 @@ declare(strict_types=1);
 
 namespace Kaiseki\WordPress\PostType;
 
-use Kaiseki\WordPress\PostType\PostType\PostTypeBuilder;
-use Kaiseki\WordPress\PostType\PostType\PostTypeBuilderFactory;
-use Kaiseki\WordPress\PostType\PostType\PostTypeBuilderInterface;
-use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilder;
-use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilderFactory;
-use Kaiseki\WordPress\PostType\Taxonomy\TaxonomyBuilderInterface;
-
 final class ConfigProvider
 {
     /**
@@ -20,17 +13,19 @@ final class ConfigProvider
     {
         return [
             'post_type' => [
+                'post_types' => [],
+                'taxonomies' => [],
                 'default_post_type_options' => [],
                 'default_taxonomy_options' => [],
             ],
-            'dependencies' => [
-                'aliases' => [
-                    PostTypeBuilderInterface::class => PostTypeBuilder::class,
-                    TaxonomyBuilderInterface::class => TaxonomyBuilder::class,
+            'hook' => [
+                'provider' => [
+                    PostTypeRegistry::class,
                 ],
+            ],
+            'dependencies' => [
                 'factories' => [
-                    PostTypeBuilder::class => PostTypeBuilderFactory::class,
-                    TaxonomyBuilder::class => TaxonomyBuilderFactory::class,
+                    PostTypeRegistry::class => PostTypeRegistryFactory::class,
                 ],
             ],
         ];

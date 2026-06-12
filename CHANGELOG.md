@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## Unreleased
+
+### Changed
+
+- **First-party registration — `jjgrainger/posttypes` removed.** Post types and taxonomies are now
+  declared as immutable `PostType` / `Taxonomy` value objects (static `create(name, singular, plural,
+  ?slug)` plus clone-based `with*()` withers and a `withOptions()` escape hatch) returned from
+  `PostTypeProviderInterface` / `TaxonomyProviderInterface` classes listed under the new
+  `post_type.post_types` / `post_type.taxonomies` config keys. A single `PostTypeRegistry`
+  (`kaiseki/wp-hook` hook provider) registers everything in one `init` callback — all taxonomies, then
+  all post types, then every taxonomy↔post-type association declared on either side. This ordering is
+  a public contract.
+- Label auto-generation reproduces the `jjgrainger/posttypes` 2.x output (13 post-type / 17 taxonomy
+  labels, "Seperate" typo fixed); `withLabels()` merges over the generated set. Labels stay English by
+  design — translate per definition.
+- `default_post_type_options` / `default_taxonomy_options` are applied by the registry between the
+  package baseline and each definition's own values (a `labels` entry in the defaults merges between
+  the generated set and `withLabels()`).
+- Admin list table columns are typed: `Columns::create()->without(...)->with(Column::create(...))` with
+  renderers that **return** the cell markup instead of echoing; sortable supports meta and numeric
+  ordering. Attached via `PostType::withColumns()`.
+- Taxonomy filter dropdowns on the admin list table are now **opt-in** via `withTaxonomyFilters()`
+  (posttypes 2.x derived them implicitly from the assigned taxonomies).
+- Rewrite args replace wholesale; only the slug default is injected when a rewrite array has no `slug`
+  (posttypes 2.x merged recursively).
+
+### Removed
+
+- `PostTypeBuilder` / `TaxonomyBuilder` (and interfaces/factories) and `PostTypeHelper` /
+  `TaxonomyHelper` — the wrapper API around `jjgrainger/posttypes` is gone, together with the
+  dependency and its name-inflection magic (all consumers pass explicit singular/plural/slug).
+  Consumers stay on `^1.0` until they migrate to the provider API.
+
+### Added
+
+- Unit test suite (PHPUnit 11 + Brain Monkey): registration call args and ordering, label parity with
+  posttypes 2.x, value-object merge precedence and immutability, column and filter hook wiring,
+  `ConfigProvider` / registry factory.
+
 ## 1.0.0 - 2026-06-01
 
 First tagged release.

@@ -2,7 +2,20 @@
     "symbol-whitelist" : [
         "null", "true", "false",
         "static", "self", "parent",
-        "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object"
+        "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never",
+        "add_action",
+        "add_filter",
+        "get_taxonomy",
+        "is_admin",
+        "is_object_in_taxonomy",
+        "register_post_type",
+        "register_taxonomy",
+        "register_taxonomy_for_object_type",
+        "sanitize_title",
+        "taxonomy_exists",
+        "wp_dropdown_categories",
+        "wp_unslash",
+        "WP_Query"
     ],
     "php-core-extensions" : [
         "Core",

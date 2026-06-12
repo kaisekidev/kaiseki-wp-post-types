@@ -23,10 +23,6 @@ updates:
         dependency-type: development
         patterns:
           - "*"
-    ignore:
-      # jjgrainger/posttypes 3.x — held: the wrapper isn't updated for v3 yet.
-      - dependency-name: "jjgrainger/posttypes"
-        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: "/"

@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * The wordpress-stubs @phpstan-param array{...} shapes for the registration
+ * args reject a generic pass-through of consumer-supplied options (mixed
+ * values). Override with the runtime-accurate array<string, mixed>.
+ *
+ * @param lowercase-string&non-empty-string $post_type
+ * @param array<string, mixed>|string       $args
+ *
+ * @return mixed
+ */
+function register_post_type($post_type, $args = array())
+{
+}
+
+/**
+ * @param string                      $taxonomy
+ * @param array<string>|string        $object_type
+ * @param array<string, mixed>|string $args
+ *
+ * @return mixed
+ */
+function register_taxonomy($taxonomy, $object_type, $args = array())
+{
+}
