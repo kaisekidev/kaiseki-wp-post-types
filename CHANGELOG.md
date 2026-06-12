@@ -15,14 +15,16 @@ All notable changes to this project will be documented in this file, in reverse 
   all post types, then every taxonomy↔post-type association declared on either side. This ordering is
   a public contract.
 - Label auto-generation reproduces the `jjgrainger/posttypes` 2.x output (13 post-type / 17 taxonomy
-  labels, "Seperate" typo fixed); `withLabels()` merges over the generated set. Labels stay English by
-  design — translate per definition.
+  labels, "Seperate" typo fixed); `withLabels()` merges over the generated set, and a `labels` entry
+  passed through `withOptions()` replaces it (call order between the two is preserved). Labels stay
+  English by design — translate per definition.
 - `default_post_type_options` / `default_taxonomy_options` are applied by the registry between the
   package baseline and each definition's own values (a `labels` entry in the defaults merges between
   the generated set and `withLabels()`).
 - Admin list table columns are typed: `Columns::create()->without(...)->with(Column::create(...))` with
   renderers that **return** the cell markup instead of echoing; sortable supports meta and numeric
-  ordering. Attached via `PostType::withColumns()`.
+  ordering and only rewrites the main admin list query (posttypes 2.x also touched secondary queries).
+  Attached via `PostType::withColumns()`.
 - Taxonomy filter dropdowns on the admin list table are now **opt-in** via `withTaxonomyFilters()`
   (posttypes 2.x derived them implicitly from the assigned taxonomies).
 - Rewrite args replace wholesale; only the slug default is injected when a rewrite array has no `slug`

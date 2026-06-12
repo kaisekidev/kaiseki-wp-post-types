@@ -97,6 +97,7 @@ final class ColumnsRegistrarTest extends TestCase
             Column::create('price', 'Price')->withSortable('price', isMeta: true, numeric: true),
         ));
         $query = Mockery::mock('WP_Query');
+        $query->shouldReceive('is_main_query')->andReturn(true);
         $query->shouldReceive('get')->with('post_type')->andReturn('book');
         $query->shouldReceive('get')->with('orderby')->andReturn('price');
         $query->shouldReceive('set')->once()->with('meta_key', 'price');
@@ -112,7 +113,22 @@ final class ColumnsRegistrarTest extends TestCase
             Column::create('price', 'Price')->withSortable('price', isMeta: true),
         ));
         $query = Mockery::mock('WP_Query');
+        $query->shouldReceive('is_main_query')->andReturn(true);
         $query->shouldReceive('get')->with('post_type')->andReturn('page');
+        $query->shouldNotReceive('set');
+
+        $registrar->applySortableOrder($query);
+    }
+
+    public function testApplySortableOrderIgnoresSecondaryQueries(): void
+    {
+        Functions\when('is_admin')->justReturn(true);
+        $registrar = new ColumnsRegistrar('book', Columns::create()->with(
+            Column::create('price', 'Price')->withSortable('price', isMeta: true),
+        ));
+        $query = Mockery::mock('WP_Query');
+        $query->shouldReceive('is_main_query')->andReturn(false);
+        $query->shouldNotReceive('get');
         $query->shouldNotReceive('set');
 
         $registrar->applySortableOrder($query);

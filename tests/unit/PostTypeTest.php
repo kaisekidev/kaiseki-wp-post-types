@@ -112,9 +112,29 @@ final class PostTypeTest extends TestCase
         self::assertSame('Books', $labels['name']);
     }
 
-    public function testLabelsViaOptionsEscapeHatchWinEntirely(): void
+    public function testLabelsViaOptionsEscapeHatchReplaceGeneratedSet(): void
     {
         $args = PostType::create('book', 'Book', 'Books')
+            ->withOptions(['labels' => ['name' => 'Books only']])
+            ->toArray();
+
+        self::assertSame(['name' => 'Books only'], $args['labels']);
+    }
+
+    public function testWithLabelsAfterOptionsLabelsMergesOverThem(): void
+    {
+        $args = PostType::create('book', 'Book', 'Books')
+            ->withOptions(['labels' => ['name' => 'Books only', 'add_new' => 'Add']])
+            ->withLabels(['add_new' => 'Neues Buch'])
+            ->toArray();
+
+        self::assertSame(['name' => 'Books only', 'add_new' => 'Neues Buch'], $args['labels']);
+    }
+
+    public function testOptionsLabelsAfterWithLabelsReplaceThem(): void
+    {
+        $args = PostType::create('book', 'Book', 'Books')
+            ->withLabels(['add_new' => 'Neues Buch'])
             ->withOptions(['labels' => ['name' => 'Books only']])
             ->toArray();
 

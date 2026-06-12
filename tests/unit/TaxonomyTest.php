@@ -72,6 +72,21 @@ final class TaxonomyTest extends TestCase
         self::assertSame('Genres', $labels['name']);
     }
 
+    public function testLabelWitherCallOrderIsPreserved(): void
+    {
+        $merged = Taxonomy::create('genre', 'Genre', 'Genres')
+            ->withOptions(['labels' => ['name' => 'Genres only']])
+            ->withLabels(['add_new_item' => 'Neues Genre'])
+            ->toArray()['labels'];
+        $replaced = Taxonomy::create('genre', 'Genre', 'Genres')
+            ->withLabels(['add_new_item' => 'Neues Genre'])
+            ->withOptions(['labels' => ['name' => 'Genres only']])
+            ->toArray()['labels'];
+
+        self::assertSame(['name' => 'Genres only', 'add_new_item' => 'Neues Genre'], $merged);
+        self::assertSame(['name' => 'Genres only'], $replaced);
+    }
+
     public function testWithersAreImmutable(): void
     {
         $original = Taxonomy::create('genre', 'Genre', 'Genres');

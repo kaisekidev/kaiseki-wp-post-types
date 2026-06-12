@@ -83,7 +83,7 @@ final class ColumnsRegistrar
 
     public function applySortableOrder(WP_Query $query): void
     {
-        if (!is_admin() || $query->get('post_type') !== $this->postType) {
+        if (!is_admin() || !$query->is_main_query() || $query->get('post_type') !== $this->postType) {
             return;
         }
         $orderBy = $query->get('orderby');

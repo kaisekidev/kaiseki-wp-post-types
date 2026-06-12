@@ -14,6 +14,8 @@ final class PostType implements PostTypeInterface
     private array $args = [];
     /** @var array<string, string> */
     private array $labels = [];
+    /** @var array<mixed>|null */
+    private ?array $labelsBase = null;
     /** @var list<string> */
     private array $taxonomies = [];
     /** @var list<string> */
@@ -148,12 +150,19 @@ final class PostType implements PostTypeInterface
     /**
      * Escape hatch for any register_post_type() argument without a typed
      * wither. Same precedence bucket as the typed withers: last call wins.
+     * A `labels` entry replaces the auto-generated set; later withLabels()
+     * calls merge over it.
      *
      * @param array<string, mixed> $options
      */
     public function withOptions(array $options): self
     {
         $clone = clone $this;
+        if (is_array($options['labels'] ?? null)) {
+            $clone->labelsBase = $options['labels'];
+            $clone->labels = [];
+            unset($options['labels']);
+        }
         $clone->args = array_replace($clone->args, $options);
 
         return $clone;
@@ -201,11 +210,13 @@ final class PostType implements PostTypeInterface
         if (is_array($rewrite)) {
             $args['rewrite'] = array_replace(['slug' => $this->slug], $rewrite);
         }
-        $args['labels'] ??= array_replace(
-            LabelGenerator::postTypeLabels($this->singular, $this->plural),
-            $defaultLabels,
-            $this->labels,
-        );
+        $args['labels'] = $this->labelsBase !== null
+            ? array_replace($this->labelsBase, $this->labels)
+            : array_replace(
+                LabelGenerator::postTypeLabels($this->singular, $this->plural),
+                $defaultLabels,
+                $this->labels,
+            );
 
         return $args;
     }
